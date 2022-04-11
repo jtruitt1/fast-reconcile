@@ -188,7 +188,7 @@ def search(raw_query, query_type='/fast/all'):
     return sorted_out[:3]
 
 
-@app.route("/reconcile", methods=['POST', 'GET'])
+@app.route("/", methods=['POST', 'GET'])
 def reconcile():
     #Single queries have been deprecated.  This can be removed.
     #Look first for form-param requests.
