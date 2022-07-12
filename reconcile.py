@@ -15,7 +15,7 @@ from flask import jsonify
 
 import json
 from operator import itemgetter
-import urllib
+import urllib.parse
 from sys import version_info
 
 #For scoring results
@@ -141,7 +141,7 @@ def search(raw_query, query_type='/fast/all'):
     query_index = query_type_meta[0]['index']
     try:
         #FAST api requires spaces to be encoded as %20 rather than +
-        url = api_base_url + '?query=' + urllib.quote(query)
+        url = api_base_url + '?query=' + urllib.parse.quote(query)
         url += '&rows=30&queryReturn=suggestall%2Cidroot%2Cauth%2cscore&suggest=autoSubject'
         url += '&queryIndex=' + query_index + '&wt=json'
         app.logger.debug("FAST API url is " + url)
@@ -232,4 +232,4 @@ if __name__ == '__main__':
     oparser.add_option('-d', '--debug', action='store_true', default=False)
     opts, args = oparser.parse_args()
     app.debug = opts.debug
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=4000)
